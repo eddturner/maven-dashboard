@@ -1,2 +1,2 @@
-maven-dash
-==========
+maven-dashboard
+===============

@@ -20,3 +20,9 @@ phonecatControllers.controller('PhoneDetailCtrl', ['$scope', '$routeParams', 'Ph
       $scope.mainImageUrl = imageUrl;
     }
   }]);
+
+phonecatControllers.controller('MainCtrl', ['$scope', '$routeParams', 'Phone',
+    function($scope, $routeParams, Phone) {
+        console.log("hello world!");
+    }
+]);

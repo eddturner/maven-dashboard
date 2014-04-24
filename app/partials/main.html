@@ -1,0 +1,26 @@
+<div class="grid-25">
+    <p>We reused the PhoneListCtrl controller that we constructed in previous steps and we added a new, empty
+        PhoneDetailCtrl controller to the app/js/controllers.js file for the phone details view.</p>
+
+    <p>Note the use of the :phoneId parameter in the second route declaration. The $route service uses the route
+        declaration — '/phones/:phoneId' — as a template that is matched against the current URL. All variables defined
+        with the : notation are extracted into the $routeParams object.</p>
+</div>
+
+<div class="grid-75">
+    <tabset>
+        <tab heading="Graph" active="tab.active" >Static content</tab>
+        <tab heading="Pom">Static content</tab>
+        <tab heading="Effective Pom">Static content</tab>
+        <tab heading="Dependency List">Static content</tab>
+        <!--<tab ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active" disabled="tab.disabled">-->
+            <!--{{tab.content}}-->
+        <!--</tab>-->
+        <!--<tab select="alertMe()">-->
+            <!--<tab-heading>-->
+                <!--<i class="glyphicon glyphicon-bell"></i> Alert!-->
+            <!--</tab-heading>-->
+            <!--I've got an HTML heading, and a select callback. Pretty cool!-->
+        <!--</tab>-->
+    </tabset>
+</div>

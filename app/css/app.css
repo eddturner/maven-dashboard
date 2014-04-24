@@ -94,6 +94,13 @@ ul.specs dt {
   font-weight: bold;
 }
 
-h1 {
-  border-bottom: 1px solid gray;
+/* specific app related styling */
+
+body {
+    font-family: 'Raleway', sans-serif;
 }
+
+h1 {
+    padding-bottom: 5px;
+}
+

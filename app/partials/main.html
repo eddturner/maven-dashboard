@@ -9,18 +9,34 @@
 
 <div class="grid-75">
     <tabset>
-        <tab heading="Graph" active="tab.active" >Static content</tab>
-        <tab heading="Pom">Static content</tab>
-        <tab heading="Effective Pom">Static content</tab>
-        <tab heading="Dependency List">Static content</tab>
+        <tab heading="Graph" active="tab.active">thing</tab>
+        <tab heading="Pom">
+            <!--<pre class="prettyprint prettyprinted">{{originalPom}}</pre>-->
+            <pre class="prettyprint linenums">&lt;?php
+$name = '&quot;Jurgen&quot;'; // Add double quotes
+?&gt;</pre>
+            <!--<code class="prettyprint">-->
+                <!--<parent>-->
+                <!--<artifactId>ujdk-parent</artifactId>-->
+                <!--<groupId>uk.ac.ebi.uniprot</groupId>-->
+                <!--<version>1.0</version>-->
+                <!--<relativePath>../uniprot-ujdk-parent</relativePath>-->
+            <!--</parent>-->
+            <!--</code>-->
+        </tab>
+        <tab heading="Effective Pom">{{effectivePom}}</tab>
+        <tab heading="Dependency List">
+            <ul>
+                <li ng-repeat="dependency in dependencyList">{{dependency.groupId}}:{{dependency.artifactId}}:{{dependency.version}}</li>
+            </ul></tab>
         <!--<tab ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active" disabled="tab.disabled">-->
-            <!--{{tab.content}}-->
+        <!--{{tab.content}}-->
         <!--</tab>-->
         <!--<tab select="alertMe()">-->
-            <!--<tab-heading>-->
-                <!--<i class="glyphicon glyphicon-bell"></i> Alert!-->
-            <!--</tab-heading>-->
-            <!--I've got an HTML heading, and a select callback. Pretty cool!-->
+        <!--<tab-heading>-->
+        <!--<i class="glyphicon glyphicon-bell"></i> Alert!-->
+        <!--</tab-heading>-->
+        <!--I've got an HTML heading, and a select callback. Pretty cool!-->
         <!--</tab>-->
     </tabset>
 </div>

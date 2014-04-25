@@ -41,8 +41,7 @@ app.config(['$routeProvider',
     function ($routeProvider) {
         $routeProvider.
             when('/overview', {
-                templateUrl: 'partials/main.html'
-                ,
+                templateUrl: 'partials/main.html',
                 controller: 'MainCtrl'
             }).
             when('/phones', {

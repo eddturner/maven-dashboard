@@ -28,6 +28,14 @@ phonecatControllers.controller('MainCtrl', ['$scope', '$routeParams', 'DataSourc
         var pomFile = "../../poms/storage-2014.05.pom";
         var effectivePomFile = "../../poms/effective/storage-2014.05.pom";
 
+        // data should be text
+        var escapeMarkup = function(data) {
+            return data.replace(/\&/g, '&amp;').
+                replace(/\</g, '&lt;').
+                replace(/\>/g, '&gt;').
+                replace(/"/g, '&quot;');
+        };
+
         var xmlTransform = function (data) {
             console.log("transform data");
             var x2js = new X2JS();
@@ -47,7 +55,7 @@ phonecatControllers.controller('MainCtrl', ['$scope', '$routeParams', 'DataSourc
         };
         var setOriginalPom = function (data) {
 //            $scope.originalPom = prettyPrintOne(replaceText(vkbeautify.xml(data, 2)), '', false);
-            $scope.originalPom = vkbeautify.xml(data, 2);
+            $scope.originalPom = angular.element(vkbeautify.xml(data, 2));
 //            $scope.originalPom = data;
         };
         var setEffectivePom = function (data) {
@@ -58,7 +66,7 @@ phonecatControllers.controller('MainCtrl', ['$scope', '$routeParams', 'DataSourc
         };
 
         DataSource.applyTransformation(effectivePomFile, setDependencyList, xmlTransform);
-        DataSource.applyTransformation(pomFile, setOriginalPom, null);
-        DataSource.applyTransformation(effectivePomFile, setEffectivePom, null);
+//        DataSource.applyTransformation(pomFile, setOriginalPom, null);
+//        DataSource.applyTransformation(effectivePomFile, setEffectivePom, null);
     }
 ]);

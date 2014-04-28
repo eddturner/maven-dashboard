@@ -12,9 +12,15 @@
         <tab heading="Graph" active="tab.active">thing</tab>
         <tab heading="Pom">
             <!--<pre class="prettyprint prettyprinted">{{originalPom}}</pre>-->
-            <pre class="prettyprint linenums">&lt;?php
-$name = '&quot;Jurgen&quot;'; // Add double quotes
-?&gt;</pre>
+            <pre><code class="prettyprint">
+class Voila {
+public:
+  // Voila
+  static const string VOILA = "Voila";
+
+  // will not interfere with embedded tags.
+}
+            </code></pre>
             <!--<code class="prettyprint">-->
                 <!--<parent>-->
                 <!--<artifactId>ujdk-parent</artifactId>-->
@@ -24,7 +30,8 @@ $name = '&quot;Jurgen&quot;'; // Add double quotes
             <!--</parent>-->
             <!--</code>-->
         </tab>
-        <tab heading="Effective Pom">{{effectivePom}}</tab>
+        <tab heading="Effective Pom"><pre><code class="prettyprint">{{effectivePom}}</code></pre></tab>
+        <tab heading="Effective Pom 2"><pre><code class="prettyprint lang-xml"><my-dir id="effective-pom"></my-dir></code></pre></tab>
         <tab heading="Dependency List">
             <ul>
                 <li ng-repeat="dependency in dependencyList">{{dependency.groupId}}:{{dependency.artifactId}}:{{dependency.version}}</li>

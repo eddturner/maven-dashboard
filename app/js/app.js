@@ -31,7 +31,7 @@ var app = angular.module('app', [
     'ngRoute',
     'phonecatAnimations',
 
-    'SimpleDirective',
+    'PomDisplay',
 
     'phonecatControllers',
     'phonecatFilters',

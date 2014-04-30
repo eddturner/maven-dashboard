@@ -1,21 +1,28 @@
 <div class="grid-25">
-    <p>We reused the PhoneListCtrl controller that we constructed in previous steps and we added a new, empty
-        PhoneDetailCtrl controller to the app/js/controllers.js file for the phone details view.</p>
+    <p>This is a placeholder.</p>
 
-    <p>Note the use of the :phoneId parameter in the second route declaration. The $route service uses the route
-        declaration — '/phones/:phoneId' — as a template that is matched against the current URL. All variables defined
-        with the : notation are extracted into the $routeParams object.</p>
+    <p>This is just a piece of a brilliant text. How good do you feel having just read this?!</p>
 </div>
 
 <div class="grid-75">
     <tabset>
-        <tab heading="Graph" active="tab.active">thing</tab>
-        <tab heading="Pom"><pom-view pom="original" id="prettified-pom" /></tab>
-        <tab heading="Effective Pom 2"><pom-view pom="effective" id="prettified-pom" /></tab>
+        <tab heading="Graph">
+            <!--<div><svg width=960 height=500 pom-graph><g transform="translate(30,30)"/></svg></div>-->
+            <div><svg width="650" height="680" pom-graph><g transform="translate(20,20)"></g></svg></div>
+        </tab>
+        <tab heading="Pom">
+            <pom-view pom="original"/>
+        </tab>
+        <tab heading="Effective Pom">
+            <pom-view pom="effective"/>
+        </tab>
 
         <tab heading="Dependency List">
             <ul>
-                <li ng-repeat="dependency in dependencyList">{{dependency.groupId}}:{{dependency.artifactId}}:{{dependency.version}}</li>
-            </ul></tab>
+                <li ng-repeat="dependency in dependencyList">
+                    {{dependency.groupId}}:{{dependency.artifactId}}:{{dependency.version}}
+                </li>
+            </ul>
+        </tab>
     </tabset>
 </div>

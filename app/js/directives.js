@@ -4,11 +4,13 @@
 var directivesModule = angular.module('PomDisplay', []);
 
 
-directivesModule.directive('pomGraph', function ($compile, DataSource) {
-    console.log("pom graph 0");
+directivesModule.directive('pomGraph', function ($timeout, DataSource) {
+	console.log("pom graph 0");
     var linkFn;
     console.log("pom graph 1");
     linkFn = function (scope, element, attrs) {
+    var updateGraph = $timeout(function() {
+    
         console.log("pom graph 2");
         var pomFile = "";
         if (attrs.pom === "effective") {
@@ -70,14 +72,17 @@ directivesModule.directive('pomGraph', function ($compile, DataSource) {
 //        console.log($compile(svg)(scope));
 //
 //        element.replaceWith(angular.element('<h1>hello world</h1>'));
-        renderer.run(g, d3.select("svg g"));
-
+        var layout = renderer.run(g, d3.select("svg g"));
+        console.log(layout.graph());
+        d3.select("svg")
+    .attr("width", layout.graph().width + 100 + 40)
+    .attr("height", layout.graph().height + 100 + 40);
 
 //        renderer.run(g, svg);
 //        console.log("html(g)");
 //        element.replaceWith(svg);
-    };
-    console.log("pom graph 3");
+    });
+    console.log("pom graph 3");};
 
     return {
         restrict: 'A',

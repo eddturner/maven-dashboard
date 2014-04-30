@@ -27,6 +27,7 @@ phonecatControllers.controller('MainCtrl', ['$scope', '$routeParams', 'DataSourc
 
         var pomFile = "../../poms/storage-2014.05.pom";
         var effectivePomFile = "../../poms/effective/storage-2014.05.pom";
+        $scope.someNumber = '5';
 
         // data should be text
         var escapeMarkup = function(data) {

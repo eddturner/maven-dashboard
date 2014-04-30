@@ -73,7 +73,7 @@ directivesModule.directive('pomGraph', function ($timeout, DataSource) {
 //
 //        element.replaceWith(angular.element('<h1>hello world</h1>'));
         var layout = renderer.run(g, d3.select("svg g"));
-        console.log(layout.graph());
+        console.log(scope.someNumber);
         d3.select("svg")
     .attr("width", layout.graph().width + 100 + 40)
     .attr("height", layout.graph().height + 100 + 40);
@@ -86,6 +86,7 @@ directivesModule.directive('pomGraph', function ($timeout, DataSource) {
 
     return {
         restrict: 'A',
+        scope: { dependencies : '=' },
         link: linkFn
     }
 }).directive('pomView', function (DataSource) {

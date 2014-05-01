@@ -28,6 +28,7 @@ phonecatControllers.controller('MainCtrl', ['$scope', '$routeParams', 'DataSourc
         var pomFile = "../../poms/storage-2014.05.pom";
         var effectivePomFile = "../../poms/effective/storage-2014.05.pom";
         $scope.someNumber = '5';
+        $scope.model = { dependencyList : 'helo'};
 
         // data should be text
         var escapeMarkup = function(data) {
@@ -52,7 +53,7 @@ phonecatControllers.controller('MainCtrl', ['$scope', '$routeParams', 'DataSourc
         }
 
         var setDependencyList = function (data) {
-            $scope.dependencyList = data;
+            $scope.model = { dependencyList : data };
         };
         var setOriginalPom = function (data) {
 //            $scope.originalPom = prettyPrintOne(replaceText(vkbeautify.xml(data, 2)), '', false);

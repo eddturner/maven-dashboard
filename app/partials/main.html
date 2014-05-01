@@ -8,7 +8,7 @@
     <tabset>
         <tab heading="Graph">
             <!--<div><svg width=960 height=500 pom-graph><g transform="translate(30,30)"/></svg></div>-->
-            <div><svg width="650" height="680" pom-graph dependencies="dependencyList"><g transform="translate(20,20)"></g></svg></div>
+            <div><svg width="650" height="680" pom-graph dependencies="model.dependencyList"><g transform="translate(20,20)"></g></svg></div>
         </tab>
         <tab heading="Pom">
             <pom-view pom="original"/>
@@ -19,7 +19,7 @@
 
         <tab heading="Dependency List">
             <ul>
-                <li ng-repeat="dependency in dependencyList">
+                <li ng-repeat="dependency in model.dependencyList">
                     {{dependency.groupId}}:{{dependency.artifactId}}:{{dependency.version}}
                 </li>
             </ul>

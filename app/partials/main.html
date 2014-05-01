@@ -8,21 +8,32 @@
     <tabset>
         <tab heading="Graph">
             <!--<div><svg width=960 height=500 pom-graph><g transform="translate(30,30)"/></svg></div>-->
-            <div><svg width="650" height="680" pom-graph dependencies="model.dependencyList"><g transform="translate(20,20)"></g></svg></div>
+            <div>
+                <svg width="650" height="680" pom-graph dependencies="model.dependencyList">
+                    <g transform="translate(20,20)"></g>
+                </svg>
+            </div>
         </tab>
         <tab heading="Pom">
-            <pom-view pom="original"/>
+            <div class="tab-body">
+                <pom-view pom="original"/>
+            </div>
         </tab>
         <tab heading="Effective Pom">
-            <pom-view pom="effective"/>
+            <div class="tab-body">
+                <pom-view pom="effective"/>
+            </div>
         </tab>
 
         <tab heading="Dependency List">
-            <ul>
-                <li ng-repeat="dependency in model.dependencyList">
-                    {{dependency.groupId}}:{{dependency.artifactId}}:{{dependency.version}}
-                </li>
-            </ul>
+            <div class="tab-body">
+                <ul class="dependency-list">
+                    <li ng-repeat="dependency in model.dependencyList" ng-class="{ 'uniprot-dependency' : dependency.groupId == 'uk.ac.ebi.uniprot' }">
+                        {{dependency.groupId}}:{{dependency.artifactId}}:{{dependency.version}}
+                    </li>
+                </ul>
+            </div>
         </tab>
+
     </tabset>
 </div>

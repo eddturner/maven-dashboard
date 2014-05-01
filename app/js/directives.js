@@ -23,30 +23,40 @@ directivesModule.directive('pomGraph', function ($timeout, DataSource) {
 
                 var g = new dagreD3.Digraph();
 
-                var states = [ "CLOSED", "LISTEN", "SYN RCVD", "SYN SENT",
-                    "ESTAB", "FINWAIT-1", "CLOSE WAIT", "FINWAIT-2",
-                    "CLOSING", "LAST-ACK", "TIME WAIT" ];
-                states.forEach(function (state) {
-                    g.addNode(state, { label: state });
+                var mainNodeText = "storage";
+                g.addNode(mainNodeText, { label: mainNodeText, style: "fill: #8ece86" });
+                scope.dependencies.forEach(function(dep) {
+                    if(dep.groupId === 'uk.ac.ebi.uniprot') {
+                        var depNodeId = dep.artifactId + ":" + dep.version;
+                        g.addNode(depNodeId, { label: dep.artifactId + ":" + dep.version});
+                        g.addEdge(null, mainNodeText, depNodeId);
+                    }
                 });
-                g.addEdge(null, "CLOSED", "LISTEN", { label: "open" });
-                g.addEdge(null, "LISTEN", "SYN RCVD", { label: "rcv SYN" });
-                g.addEdge(null, "LISTEN", "SYN SENT", { label: "send" });
-                g.addEdge(null, "LISTEN", "CLOSED", { label: "close" });
-                g.addEdge(null, "SYN RCVD", "FINWAIT-1", { label: "close" });
-                g.addEdge(null, "SYN RCVD", "ESTAB", { label: "rcv ACK of SYN" });
-                g.addEdge(null, "SYN SENT", "SYN RCVD", { label: "rcv SYN" });
-                g.addEdge(null, "SYN SENT", "ESTAB", { label: "rcv SYN, ACK" });
-                g.addEdge(null, "SYN SENT", "CLOSED", { label: "close" });
-                g.addEdge(null, "ESTAB", "FINWAIT-1", { label: "close" });
-                g.addEdge(null, "ESTAB", "CLOSE WAIT", { label: "rcv FIN" });
-                g.addEdge(null, "FINWAIT-1", "FINWAIT-2", { label: "rcv ACK of FIN" });
-                g.addEdge(null, "FINWAIT-1", "CLOSING", { label: "rcv FIN" });
-                g.addEdge(null, "CLOSE WAIT", "LAST-ACK", { label: "close" });
-                g.addEdge(null, "FINWAIT-2", "TIME WAIT", { label: "rcv FIN" });
-                g.addEdge(null, "CLOSING", "TIME WAIT", { label: "rcv ACK of FIN" });
-                g.addEdge(null, "LAST-ACK", "CLOSED", { label: "rcv ACK of FIN" });
-                g.addEdge(null, "TIME WAIT", "CLOSED", { label: "timeout=2MSL" });
+
+//                var states = [ "CLOSED", "LISTEN", "SYN RCVD", "SYN SENT",
+//                    "ESTAB", "FINWAIT-1", "CLOSE WAIT", "FINWAIT-2",
+//                    "CLOSING", "LAST-ACK", "TIME WAIT" ];
+//                states.forEach(function (state) {
+//                    g.addNode(state, { label: state });
+//                });
+//                g.addEdge(null, "CLOSED", "LISTEN", { label: "open" });
+//                g.addEdge(null, "LISTEN", "SYN RCVD", { label: "rcv SYN" });
+//                g.addEdge(null, "LISTEN", "SYN SENT", { label: "send" });
+//                g.addEdge(null, "LISTEN", "CLOSED", { label: "close" });
+//                g.addEdge(null, "SYN RCVD", "FINWAIT-1", { label: "close" });
+//                g.addEdge(null, "SYN RCVD", "ESTAB", { label: "rcv ACK of SYN" });
+//                g.addEdge(null, "SYN SENT", "SYN RCVD", { label: "rcv SYN" });
+//                g.addEdge(null, "SYN SENT", "ESTAB", { label: "rcv SYN, ACK" });
+//                g.addEdge(null, "SYN SENT", "CLOSED", { label: "close" });
+//                g.addEdge(null, "ESTAB", "FINWAIT-1", { label: "close" });
+//                g.addEdge(null, "ESTAB", "CLOSE WAIT", { label: "rcv FIN" });
+//                g.addEdge(null, "FINWAIT-1", "FINWAIT-2", { label: "rcv ACK of FIN" });
+//                g.addEdge(null, "FINWAIT-1", "CLOSING", { label: "rcv FIN" });
+//                g.addEdge(null, "CLOSE WAIT", "LAST-ACK", { label: "close" });
+//                g.addEdge(null, "FINWAIT-2", "TIME WAIT", { label: "rcv FIN" });
+//                g.addEdge(null, "CLOSING", "TIME WAIT", { label: "rcv ACK of FIN" });
+//                g.addEdge(null, "LAST-ACK", "CLOSED", { label: "rcv ACK of FIN" });
+//                g.addEdge(null, "TIME WAIT", "CLOSED", { label: "timeout=2MSL" });
 
                 var renderer = new dagreD3.Renderer();
                 var oldDrawNodes = renderer.drawNodes();
@@ -55,10 +65,14 @@ directivesModule.directive('pomGraph', function ($timeout, DataSource) {
                     svgNodes.attr("id", function (u) {
                         return "node-" + u;
                     });
+                    svgNodes.select("rect").attr("style", function(u) { return g.node(u).style; });
                     return svgNodes;
                 });
                 console.log(d3.select("svg g"));
-                var layout = renderer.run(g, d3.select("svg g"));
+                var layout = dagreD3.layout()
+                    .nodeSep(30)
+                    .rankDir("LR");
+                var layout = renderer.layout(layout).run(g, d3.select("svg g"));
                 console.log("depList");
                 console.log(scope.dependencies);
             });

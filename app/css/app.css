@@ -104,8 +104,8 @@ h1 {
     padding-bottom: 5px;
 }
 
-pre {
-    border: none; !important
+div>pre.prettyprint {
+    border: 0px; !important
 }
 
 /* dagre */
@@ -113,6 +113,32 @@ pre {
 svg {
     /*border: 1px solid black;*/
     overflow: hidden;
+}
+
+div.tab-body {
+    padding-top : 20px;
+    padding-left : 10px;
+    padding-right : 10px;
+}
+
+ul.dependency-list {
+    list-style-type: none;
+    margin-left: 0px;
+    padding-left: 0px;
+}
+.dependency-list li {
+    border-bottom: 1px solid lightgrey;
+    padding-bottom: 6px;
+    padding-top: 6px;
+    margin-left: 0px;
+    padding-left: 0px;
+}
+.dependency-list li:last-child {
+    border-bottom: none;
+}
+.uniprot-dependency {
+    font-weight : bold;
+    color : #0f55bf;
 }
 
 text {

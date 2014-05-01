@@ -1,13 +1,23 @@
 <div class="grid-25">
-    <p>This is a placeholder.</p>
-
-    <p>This is just a piece of a brilliant text. How good do you feel having just read this?!</p>
+    <div class="pom-chooser">
+        <div class="pom-chooser-title">Select POM...</div>
+        <div class="pom-chooser-body">
+            <ul class="pom-list">
+                <li ng-repeat="pom in model.pomList.poms"
+                    ng-class="{ 'pom-list-item-hovering' : hover}"
+                    ng-mouseenter="hover = true"
+                    ng-mouseleave="hover = false"
+                    ng-click="pomListOnClick($event)">
+                    {{pom.name}}
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>
 
 <div class="grid-75">
     <tabset>
         <tab heading="Graph">
-            <!--<div><svg width=960 height=500 pom-graph><g transform="translate(30,30)"/></svg></div>-->
             <div>
                 <svg width="650" height="680" pom-graph dependencies="model.dependencyList">
                     <g transform="translate(20,20)"></g>
@@ -16,19 +26,20 @@
         </tab>
         <tab heading="Pom">
             <div class="tab-body">
-                <pom-view pom="original"/>
+                <pom-view pom="original" currentPomName="model.currentPomName"/>
             </div>
         </tab>
         <tab heading="Effective Pom">
             <div class="tab-body">
-                <pom-view pom="effective"/>
+                <pom-view pom="effective" currentPomName="model.currentPomName"/>
             </div>
         </tab>
 
         <tab heading="Dependency List">
             <div class="tab-body">
                 <ul class="dependency-list">
-                    <li ng-repeat="dependency in model.dependencyList" ng-class="{ 'uniprot-dependency' : dependency.groupId == 'uk.ac.ebi.uniprot' }">
+                    <li ng-repeat="dependency in model.dependencyList"
+                        ng-class="{ 'uniprot-dependency' : dependency.groupId == 'uk.ac.ebi.uniprot' }">
                         {{dependency.groupId}}:{{dependency.artifactId}}:{{dependency.version}}
                     </li>
                 </ul>

@@ -108,6 +108,17 @@ div>pre.prettyprint {
     border: 0px; !important
 }
 
+div>.pom-chooser-title {
+    padding-top:12px;
+    padding-bottom:10px;
+    font-weight: bold;
+}
+.pom-chooser-body {
+    padding-top : 20px;
+    padding-left : 10px;
+    padding-right : 10px;
+}
+
 /* dagre */
 
 svg {
@@ -139,6 +150,19 @@ ul.dependency-list {
 .uniprot-dependency {
     font-weight : bold;
     color : #0f55bf;
+}
+
+ul.pom-list {
+    list-style-type: none;
+}
+.pom-list li {
+    padding-bottom: 7px;
+    padding-top: 6px;
+    margin-left: 0px;
+    padding-left: 0px;
+}
+li.pom-list-item-hovering {
+    background-color: #c9e0ff;
 }
 
 text {

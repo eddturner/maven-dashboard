@@ -33,31 +33,6 @@ directivesModule.directive('pomGraph', function ($timeout, DataSource) {
                     }
                 });
 
-//                var states = [ "CLOSED", "LISTEN", "SYN RCVD", "SYN SENT",
-//                    "ESTAB", "FINWAIT-1", "CLOSE WAIT", "FINWAIT-2",
-//                    "CLOSING", "LAST-ACK", "TIME WAIT" ];
-//                states.forEach(function (state) {
-//                    g.addNode(state, { label: state });
-//                });
-//                g.addEdge(null, "CLOSED", "LISTEN", { label: "open" });
-//                g.addEdge(null, "LISTEN", "SYN RCVD", { label: "rcv SYN" });
-//                g.addEdge(null, "LISTEN", "SYN SENT", { label: "send" });
-//                g.addEdge(null, "LISTEN", "CLOSED", { label: "close" });
-//                g.addEdge(null, "SYN RCVD", "FINWAIT-1", { label: "close" });
-//                g.addEdge(null, "SYN RCVD", "ESTAB", { label: "rcv ACK of SYN" });
-//                g.addEdge(null, "SYN SENT", "SYN RCVD", { label: "rcv SYN" });
-//                g.addEdge(null, "SYN SENT", "ESTAB", { label: "rcv SYN, ACK" });
-//                g.addEdge(null, "SYN SENT", "CLOSED", { label: "close" });
-//                g.addEdge(null, "ESTAB", "FINWAIT-1", { label: "close" });
-//                g.addEdge(null, "ESTAB", "CLOSE WAIT", { label: "rcv FIN" });
-//                g.addEdge(null, "FINWAIT-1", "FINWAIT-2", { label: "rcv ACK of FIN" });
-//                g.addEdge(null, "FINWAIT-1", "CLOSING", { label: "rcv FIN" });
-//                g.addEdge(null, "CLOSE WAIT", "LAST-ACK", { label: "close" });
-//                g.addEdge(null, "FINWAIT-2", "TIME WAIT", { label: "rcv FIN" });
-//                g.addEdge(null, "CLOSING", "TIME WAIT", { label: "rcv ACK of FIN" });
-//                g.addEdge(null, "LAST-ACK", "CLOSED", { label: "rcv ACK of FIN" });
-//                g.addEdge(null, "TIME WAIT", "CLOSED", { label: "timeout=2MSL" });
-
                 var renderer = new dagreD3.Renderer();
                 var oldDrawNodes = renderer.drawNodes();
                 renderer.drawNodes(function (graph, root) {
@@ -88,12 +63,15 @@ directivesModule.directive('pomGraph', function ($timeout, DataSource) {
 }).directive('pomView', function (DataSource) {
     var linkFn;
     linkFn = function (scope, element, attrs) {
+        scope.$watch('currentPomName', function () {
         var pomFile = "";
+        console.log("currentpom in directive");
+        console.log(currentPomName);
         if (attrs.pom === "effective") {
-            pomFile = "../../poms/effective/storage-2014.05.pom";
+            pomFile = "../../poms/effective/"+scope.currentPomName;
         }
         else if (attrs.pom === "original") {
-            pomFile = "../../poms/storage-2014.05.pom";
+            pomFile = "../../poms/"+scope.currentPomName;
         }
 
         DataSource.applyTransformation(pomFile, function (data) {
@@ -108,10 +86,11 @@ directivesModule.directive('pomGraph', function ($timeout, DataSource) {
             pomView.append('</pre>');
             element.replaceWith(pomView);
         }, null);
-    };
+    })};
 
     return {
         restrict: 'E',
+        scope: { currentPomName: '=' },
         link: linkFn
     }
 });

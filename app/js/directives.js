@@ -25,8 +25,8 @@ directivesModule.directive('pomGraph', function ($timeout, DataSource) {
 
                 var mainNodeText = "storage";
                 g.addNode(mainNodeText, { label: mainNodeText, style: "fill: #8ece86" });
-                scope.dependencies.forEach(function(dep) {
-                    if(dep.groupId === 'uk.ac.ebi.uniprot') {
+                scope.dependencies.forEach(function (dep) {
+                    if (dep.groupId === 'uk.ac.ebi.uniprot') {
                         var depNodeId = dep.artifactId + ":" + dep.version;
                         g.addNode(depNodeId, { label: dep.artifactId + ":" + dep.version});
                         g.addEdge(null, mainNodeText, depNodeId);
@@ -40,7 +40,9 @@ directivesModule.directive('pomGraph', function ($timeout, DataSource) {
                     svgNodes.attr("id", function (u) {
                         return "node-" + u;
                     });
-                    svgNodes.select("rect").attr("style", function(u) { return g.node(u).style; });
+                    svgNodes.select("rect").attr("style", function (u) {
+                        return g.node(u).style;
+                    });
                     return svgNodes;
                 });
                 console.log(d3.select("svg g"));
@@ -60,37 +62,58 @@ directivesModule.directive('pomGraph', function ($timeout, DataSource) {
         scope: { dependencies: '=' },
         link: linkFn
     }
-}).directive('pomView', function (DataSource) {
+}).directive('pomView', function ($timeout, $compile, DataSource) {
     var linkFn;
     linkFn = function (scope, element, attrs) {
         scope.$watch('currentPomName', function () {
-        var pomFile = "";
-        console.log("currentpom in directive");
-        console.log(currentPomName);
-        if (attrs.pom === "effective") {
-            pomFile = "../../poms/effective/"+scope.currentPomName;
-        }
-        else if (attrs.pom === "original") {
-            pomFile = "../../poms/"+scope.currentPomName;
-        }
+//            $timeout(function () {
+                var pomFile = "";
+                console.log("currentpom in directive");
+                console.log(scope.currentPomName);
+                if (attrs.pom === "effective") {
+                    pomFile = "../../poms/effective/" + scope.currentPomName;
+                }
+                else if (attrs.pom === "original") {
+                    pomFile = "../../poms/" + scope.currentPomName;
+                }
+                console.log("pomFile in directive = " + pomFile);
 
-        DataSource.applyTransformation(pomFile, function (data) {
-            var spaced = vkbeautify.xml(data, 2);
-            spaced = spaced.replace(/\&/g, '&amp;').
-                replace(/\</g, '&lt;').
-                replace(/\>/g, '&gt;').
-                replace(/"/g, '&quot;');
+                DataSource.applyTransformation(pomFile, function (data) {
+                    var spaced = vkbeautify.xml(data, 2);
+                    spaced = spaced.replace(/\&/g, '&amp;').
+                        replace(/\</g, '&lt;').
+                        replace(/\>/g, '&gt;').
+                        replace(/"/g, '&quot;');
 
-            var pomView = angular.element('<pre class="prettyprint">');
-            pomView.append(prettyPrintOne(spaced));
-            pomView.append('</pre>');
-            element.replaceWith(pomView);
-        }, null);
-    })};
+//                    if(element.children().length == 0)
+                    var newContents = angular.element(prettyPrintOne(spaced));
+                    element.replaceWith(newContents);
+//                    else
+//                        console.log(element.contents());
+//                        element.contents().replaceWith(prettyPrintOne(spaced));
+
+//                    var pomView = angular.element('<pre class="prettyprint">');
+//                    pomView.append(prettyPrintOne(spaced));
+//                    pomView.append('</pre>');
+                    console.log("replacing element: ");
+                    console.log(element);
+                    console.log("with: ");
+                    console.log(newContents);
+//                    console.log(pomView);
+//                element.replaceWith(pomView);
+
+//                    $compile(pomView)(scope);
+//                    element.replaceWith(angular.element('<pre class="prettyprint">' + prettyPrintOne(spaced) + '</pre>'));
+//                }, null);
+            });
+        }, true)
+    };
 
     return {
-        restrict: 'E',
+        restrict: 'EA',
         scope: { currentPomName: '=' },
+//        replace : true,
+//        transclude:true,
         link: linkFn
     }
 });

@@ -38,8 +38,8 @@ phonecatControllers.controller('MainCtrl', ['$scope', '$routeParams', 'DataSourc
 
         /*---------- functions -----------*/
         $scope.pomListOnClick = function (event) {
-            console.log(event.target.innerText);
             $scope.model.currentPomName = event.target.innerText;
+            console.log("set $scope.model.currentPomName = " + $scope.model.currentPomName);
             updateViews();
         };
 

@@ -87,7 +87,12 @@ directivesModule.directive('pomGraph', function ($timeout, DataSource) {
 
 //                    if(element.children().length == 0)
                     var newContents = angular.element(prettyPrintOne(spaced));
-                    element.replaceWith(newContents);
+                    element.html(newContents);
+            //         if (element.next().length) {
+            //     element.next().insertBefore(element);
+            // }
+                    // element.replaceWith($compile(prettyPrintOne(spaced))(scope));
+                    // element.children().append(newContents);
 //                    else
 //                        console.log(element.contents());
 //                        element.contents().replaceWith(prettyPrintOne(spaced));
@@ -112,8 +117,9 @@ directivesModule.directive('pomGraph', function ($timeout, DataSource) {
     return {
         restrict: 'EA',
         scope: { currentPomName: '=' },
-//        replace : true,
-//        transclude:true,
+       // replace : true,
+       // transclude: true,
+       // template: '<pre class="prettyprint" ng-transclude></pre>',
         link: linkFn
     }
 });

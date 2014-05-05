@@ -21,7 +21,7 @@ services.factory('DataSource', ['$http', function ($http) {
             ).
                 success(function (data, status) {
                     console.log("Request succeeded");
-                    console.log(">>>> "+data);
+                    // console.log(">>>> "+data);
                     if( callback != null)
                         callback(data);
                 }).

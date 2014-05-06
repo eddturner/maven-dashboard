@@ -18,6 +18,7 @@ echo "pom directory: $pomDir"
 for pom in $poms; do
     echo "creating effective pom for, $pom";
     pomBase=$( basename $pom );
+	(mvn -f $pom org.apache.maven.plugins:maven-dependency-plugin:2.4:tree -DoutputType="graphml" -DoutputFile=$effectivePomDir/$pomBase.graphml) &
 	(mvn -f $pom help:effective-pom -Doutput=$effectivePomDir/$pomBase;
 	 sed -i '' -e 's/^<!--.*-->$//' -e '/^[ \t]*$/d' $effectivePomDir/$pomBase;) &
 done

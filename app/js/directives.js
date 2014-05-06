@@ -13,13 +13,53 @@ directivesModule.directive('pomGraph', function ($timeout, DataSource) {
             var updateGraph = $timeout(function () {
 
                 console.log("pom graph 2");
-                var pomFile = "";
-                if (attrs.pom === "effective") {
-                    pomFile = "../../poms/effective/storage-2014.05.pom";
-                }
-                else if (attrs.pom === "original") {
-                    pomFile = "../../poms/storage-2014.05.pom";
-                }
+                var pomGraphFile = "../../poms/effective/storage-2014.05.pom.graphml";
+                
+                var xmlTransform = function (data) {
+                    console.log("transform data");
+                    var x2js = new X2JS();
+                    var json = x2js.xml_str2json(data);
+                    // console.log(">> ");
+                    // console.log(data);
+                    return json.graphml.graph;
+                };
+
+                DataSource.applyTransformation(pomGraphFile, function (data) {
+                    console.log(">> ");
+                    console.log(data);
+                    var g = new dagreD3.Digraph();
+                    data.node.forEach(function (node) {
+                        var nodeId = node._id;
+                        console.log(nodeId);
+                        console.log(node);
+                        g.addNode(nodeId, { label: node.data.ShapeNode.NodeLabel.__text});
+                    });
+                    // data.edge.forEach(function(edge){
+                    //     var edgeId = node.id;
+                    //     g.addNode(nodeId, { label: node.y:NodeLabel});
+                    //     g.addEdge(null, mainNodeText, depNodeId);
+                    // });
+
+                    var renderer = new dagreD3.Renderer();
+                    var oldDrawNodes = renderer.drawNodes();
+                    renderer.drawNodes(function (graph, root) {
+                        var svgNodes = oldDrawNodes(graph, root);
+                        svgNodes.attr("id", function (u) {
+                            return "node-" + u;
+                        });
+                        svgNodes.select("rect").attr("style", function (u) {
+                            return g.node(u).style;
+                        });
+                        return svgNodes;
+                    });
+                    console.log(d3.select("svg g"));
+                    var layout = dagreD3.layout()
+                        .nodeSep(30)
+                        .rankDir("LR");
+                    var layout = renderer.layout(layout).run(g, d3.select("svg g"));
+                }, xmlTransform);
+
+
 
                 var g = new dagreD3.Digraph();
 
@@ -85,31 +125,12 @@ directivesModule.directive('pomGraph', function ($timeout, DataSource) {
                         replace(/\>/g, '&gt;').
                         replace(/"/g, '&quot;');
 
-//                    if(element.children().length == 0)
                     var newContents = angular.element(prettyPrintOne(spaced));
                     element.html(newContents);
-            //         if (element.next().length) {
-            //     element.next().insertBefore(element);
-            // }
-                    // element.replaceWith($compile(prettyPrintOne(spaced))(scope));
-                    // element.children().append(newContents);
-//                    else
-//                        console.log(element.contents());
-//                        element.contents().replaceWith(prettyPrintOne(spaced));
-
-//                    var pomView = angular.element('<pre class="prettyprint">');
-//                    pomView.append(prettyPrintOne(spaced));
-//                    pomView.append('</pre>');
-                    console.log("replacing element: ");
-                    console.log(element);
-                    console.log("with: ");
-                    console.log(newContents);
-//                    console.log(pomView);
-//                element.replaceWith(pomView);
-
-//                    $compile(pomView)(scope);
-//                    element.replaceWith(angular.element('<pre class="prettyprint">' + prettyPrintOne(spaced) + '</pre>'));
-//                }, null);
+                    // console.log("replacing element: ");
+                    // console.log(element);
+                    // console.log("with: ");
+                    // console.log(newContents);
             });
         }, true)
     };
@@ -117,9 +138,6 @@ directivesModule.directive('pomGraph', function ($timeout, DataSource) {
     return {
         restrict: 'EA',
         scope: { currentPomName: '=' },
-       // replace : true,
-       // transclude: true,
-       // template: '<pre class="prettyprint" ng-transclude></pre>',
         link: linkFn
     }
 });

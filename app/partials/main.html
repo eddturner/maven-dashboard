@@ -17,27 +17,13 @@
 
 <div class="grid-75">
     <tabset>
-        <tab heading="Graph">
-            <div>
-                <svg width="650" height="680" pom-graph dependencies="model.dependencyList">
-                    <g transform="translate(20,20)"></g>
-                </svg>
-            </div>
-        </tab>
         <tab heading="Pom">
             <div class="tab-body">
                 <!--<pom-view pom="original" current-pom-name="model.currentPomName"/>-->
                 <pre class="prettyprint"><pom-view pom="original" current-pom-name="model.currentPomName"/></pre>
             </div>
         </tab>
-        <tab heading="Effective Pom">
-            <div class="tab-body">
-                <!--<pom-view pom="effective" current-pom-name="model.currentPomName"/>-->
-                <pre class="prettyprint"><pom-view pom="effective" current-pom-name="model.currentPomName"/></pre>
-            </div>
-        </tab>
-
-        <tab heading="Dependency List">
+        <tab heading="Dependencies">
             <div class="tab-body">
                 <ul class="dependency-list">
                     <li ng-repeat="dependency in model.dependencyList"
@@ -47,6 +33,21 @@
                 </ul>
             </div>
         </tab>
+        <tab heading="Effective Pom">
+            <div class="tab-body">
+                <!--<pom-view pom="effective" current-pom-name="model.currentPomName"/>-->
+                <pre class="prettyprint"><pom-view pom="effective" current-pom-name="model.currentPomName"/></pre>
+            </div>
+        </tab>
+        <tab heading="Graph">
+            <div>
+            <!--<div style="width: inherit; overflow-x: auto; border:1px solid red;">-->
+                <svg width="650" height="680" pom-graph current-pom-name="model.currentPomName">
+                    <g transform="translate(20,20)"></g>
+                </svg>
+            </div>
+        </tab>
+
 
     </tabset>
 </div>

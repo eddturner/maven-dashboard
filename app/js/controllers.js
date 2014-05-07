@@ -40,7 +40,17 @@ phonecatControllers.controller('MainCtrl', ['$scope', '$routeParams', 'DataSourc
         $scope.pomListOnClick = function (event) {
             $scope.model.currentPomName = event.target.innerText;
             console.log("set $scope.model.currentPomName = " + $scope.model.currentPomName);
-            updateViews();
+            $scope.updateViews();
+        };
+
+        $scope.orderByRelease = function (pomName) {
+            var matches = pomName.name.match(/.*([0-9]{4}\.[0-9]{2}.*)\.pom/);
+            if (matches.length === 2) {
+                return matches[1];
+            }
+            else {
+                return pomName;
+            }
         };
 
         var xmlTransform = function (data) {
@@ -52,6 +62,11 @@ phonecatControllers.controller('MainCtrl', ['$scope', '$routeParams', 'DataSourc
         };
 
         var setDependencyList = function (data) {
+            console.log(">>");
+            console.log(data);
+            if (data.length > 0) {
+//                $scope.model.currentPomName = data.poms[0].name;
+            }
             $scope.model.dependencyList = data;
         };
 
@@ -60,11 +75,11 @@ phonecatControllers.controller('MainCtrl', ['$scope', '$routeParams', 'DataSourc
             console.log($scope.model.pomList);
         };
 
-        var updateViews = function () {
-            DataSource.applyTransformation(pomDir+"effective/"+$scope.model.currentPomName, setDependencyList, xmlTransform);
+        $scope.updateViews = function () {
+            DataSource.applyTransformation(pomDir + "effective/" + $scope.model.currentPomName, setDependencyList, xmlTransform);
         };
 
-        updateViews();
+        $scope.updateViews();
         DataSource.applyTransformation(pomListFile, setPomList, null);
 
     }

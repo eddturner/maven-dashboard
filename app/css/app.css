@@ -100,23 +100,23 @@ body {
     font-family: 'Raleway', sans-serif;
 }
 
-h1 {
-    padding-bottom: 5px;
+.heading {
+    padding-bottom: 20px;
 }
 
 div>pre.prettyprint {
     border: 0px; !important
 }
 
-div>.pom-chooser-title {
-    padding-top:12px;
-    padding-bottom:10px;
-    font-weight: bold;
+div>.pom-chooser-filter {
+    margin-top:12px;
+    margin-bottom:30px;
+    /*font-weight: bold;*/
 }
 .pom-chooser-body {
     padding-top : 20px;
-    padding-left : 10px;
-    padding-right : 10px;
+    /*padding-left : 10px;*/
+    /*padding-right : 10px;*/
 }
 
 /* dagre */
@@ -161,15 +161,15 @@ ul.pom-list {
     margin-left: 0px;
     padding-left: 0px;
 }
-li.pom-list-item-hovering {
-    background-color: #c9e0ff;
-}
+/*li.pom-list-item-hovering {*/
+    /*background-color: #c9e0ff;*/
+/*}*/
 
-text {
-    font-weight: 300;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serf;
-    font-size: 11px;
-}
+/*text {*/
+    /*font-weight: 300;*/
+    /*font-family: "Helvetica Neue", Helvetica, Arial, sans-serf;*/
+    /*font-size: 11px;*/
+/*}*/
 
 .node rect {
     stroke-width: 1px;

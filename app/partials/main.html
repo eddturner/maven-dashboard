@@ -35,12 +35,12 @@
 <div class="grid-75">
     <tabset>
         <tab heading="POM">
-            <div class="tab-body">
+            <div class="tab-body" select="model.graphBeingShown=false">
                 <pre ng-if="model.currentPomName != ''" class="prettyprint"><pom-view pom="original" current-pom-name="model.currentPomName"/></pre>
                 <div ng-if="model.currentPomName === ''"><div class="alert alert-info"><b>Hello!</b> Select a POM on the left to get started...</div></div>
             </div>
         </tab>
-        <tab heading="Dependencies">
+        <tab heading="Dependencies" select="model.graphBeingShown=false">
             <div class="tab-body">
                 <ul ng-if="model.currentPomName != ''" class="dependency-list">
                     <li ng-repeat="dependency in model.dependencyList"
@@ -51,15 +51,15 @@
                 <div ng-if="model.currentPomName === ''"><div class="alert alert-info"><b>Hello!</b> Select a POM on the left to get started...</div></div>
             </div>
         </tab>
-        <tab heading="Effective POM">
+        <tab heading="Effective POM" select="model.graphBeingShown=false">
             <div class="tab-body">
                 <pre ng-if="model.currentPomName != ''" class="prettyprint"><pom-view pom="effective" current-pom-name="model.currentPomName"/></pre>
                 <div ng-if="model.currentPomName === ''"><div class="alert alert-info"><b>Hello!</b> Select a POM on the left to get started...</div></div>
             </div>
         </tab>
-        <tab heading="Graph">
+        <tab heading="Graph" select="model.graphBeingShown=true; console.log('graph shown');">
             <div class="tab-body">
-                <svg ng-if="model.currentPomName != ''" width="650" height="680" pom-graph current-pom-name="model.currentPomName">
+                <svg ng-if="model.currentPomName != ''" width="650" height="680" pom-graph current-pom-name="model.currentPomName" graph-being-shown="model.graphBeingShown">
                     <g transform="translate(20,20)"></g>
                 </svg>
                 <div ng-if="model.currentPomName === ''"><div class="alert alert-info"><b>Hello!</b> Select a POM on the left to get started...</div></div>

@@ -25,7 +25,8 @@ phonecatControllers.controller('MainCtrl', ['$scope', '$routeParams', 'DataSourc
     function ($scope, $routeParams, DataSource) {
         $scope.model = { dependencyList: [],
             pomList: [],
-            currentPomName: ""
+            currentPomName: "",
+            graphBeingShown:false
         };
 
         console.log("hello world!");

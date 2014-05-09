@@ -9,7 +9,7 @@ directivesModule.directive('pomGraph', function ($timeout, DataSource) {
     var linkFn;
     console.log("pom graph 1");
     linkFn = function (scope, element, attrs) {
-        scope.$watch('currentPomName', function () {
+        scope.$watchCollection('[graphBeingShown, currentPomName]', function () {
             var updateGraph = $timeout(function () {
 
                 console.log("pom graph 2");
@@ -70,14 +70,17 @@ directivesModule.directive('pomGraph', function ($timeout, DataSource) {
                         .attr("width", layout.graph().width + 40)
                         .attr("height", layout.graph().height + 40);
                 }, xmlTransform);
-            });
+            },50);
         }, true);
         console.log("pom graph 3");
     };
 
     return {
         restrict: 'A',
-        scope: { currentPomName: '=' },
+        scope: {
+            currentPomName: '=',
+            graphBeingShown: '='
+        },
         link: linkFn
     }
 }).directive('pomView', function ($timeout, $compile, DataSource) {

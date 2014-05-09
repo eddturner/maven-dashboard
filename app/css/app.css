@@ -108,13 +108,13 @@ div>pre.prettyprint {
     border: 0px; !important
 }
 
-div>.pom-chooser-filter {
-    margin-top:12px;
-    margin-bottom:30px;
+div>.pom-chooser {
+    padding-top:2px;
+    /*margin-bottom:30px;*/
     /*font-weight: bold;*/
 }
 .pom-chooser-body {
-    padding-top : 20px;
+    padding-top : 25px;
     /*padding-left : 10px;*/
     /*padding-right : 10px;*/
 }

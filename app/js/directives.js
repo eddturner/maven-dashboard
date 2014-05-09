@@ -65,12 +65,13 @@ directivesModule.directive('pomGraph', function ($timeout, DataSource) {
                         .nodeSep(20)
                         .rankDir("LR");
                     var layout = renderer.layout(layout).run(g, d3.select("svg g"));
+                    console.log(layout.graph().width + " / " + layout.graph().height);
                     d3.select("svg")
                         .attr("width", layout.graph().width + 40)
                         .attr("height", layout.graph().height + 40);
                 }, xmlTransform);
             });
-        });
+        }, true);
         console.log("pom graph 3");
     };
 

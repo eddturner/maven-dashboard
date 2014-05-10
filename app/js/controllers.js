@@ -44,6 +44,11 @@ phonecatControllers.controller('MainCtrl', ['$scope', '$routeParams', 'DataSourc
             $scope.updateViews();
         };
 
+        $scope.setGraphBeingShown = function (isShown) {
+            $scope.model.graphBeingShown = isShown;
+            console.log("set $scope.model.graphBeingShown = " + $scope.model.graphBeingShown);
+        };
+
         $scope.orderByRelease = function (pomName) {
             var matches = pomName.name.match(/.*([0-9]{4}\.[0-9]{2}.*)\.pom/);
             if (matches.length === 2) {

@@ -10,6 +10,12 @@ directivesModule.directive('pomGraph', function ($timeout, DataSource) {
     console.log("pom graph 1");
     linkFn = function (scope, element, attrs) {
         scope.$watchCollection('[graphBeingShown, currentPomName]', function () {
+            if(scope.currentPomName != null)
+                console.log('** scope.currentPomName='+ scope.currentPomName);
+            if(scope.graphBeingShown != null)
+                console.log('** scope.graphBeingShown='+scope.graphBeingShown);
+            if(scope.graphBeingShown == false)
+                return;
             var updateGraph = $timeout(function () {
 
                 console.log("pom graph 2");
@@ -64,11 +70,21 @@ directivesModule.directive('pomGraph', function ($timeout, DataSource) {
                     var layout = dagreD3.layout()
                         .nodeSep(20)
                         .rankDir("LR");
+
+                    // Custom transition function
+                    function transition(selection) {
+                        return selection.transition().duration(500);
+                    }
+                    renderer.transition(transition);
+          
                     var layout = renderer.layout(layout).run(g, d3.select("svg g"));
                     console.log(layout.graph().width + " / " + layout.graph().height);
-                    d3.select("svg")
+                    d3.select("svg").transition()
                         .attr("width", layout.graph().width + 40)
-                        .attr("height", layout.graph().height + 40);
+                        .attr("height", layout.graph().height + 40)
+                        // .duration(1000)
+                        // .delay(500)
+                        ;
                 }, xmlTransform);
             },50);
         }, true);

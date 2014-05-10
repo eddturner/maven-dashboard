@@ -1,0 +1,20 @@
+how to setup poms for reading by angularjs app.
+1. get pom: either from git repo, or get all of them via ./get_poms.sh
+2. organiseInFs for the pom, to copy it to a prettier directory based on version and artifact
+2.a. may need to batch run organiseInFS, so if we need to quickly recreate all (if error occurs), then we can do so.
+3. pom2effectiveAndGraph for the poms in the organised directories. this will create effective poms, and graphs (xml format) for them in teh same directory
+3.a. may need to batch run pom2effectiveAndGraph, this can be done by file globbing the passed script parameter
+
+todo:
+* create batch runner of organiseFS:
+done
+run as ./organiseInFS.sh ../poms/ ../poms/parser*.pom 
+* update angularjs app to refer to poms in organised pom structure
+* need to create json pom list from organised poms. the pom list should be of the format:
+{ "poms" : [
+{ "name" : ORIGINAL-POM,
+  "version" : VERSION,
+  "artifact" : ARTIFACT }*
+]
+}
+* Update angularjs read json pom list and create an accordian list on the left hand side which opens up version->artifact->poms.

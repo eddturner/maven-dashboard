@@ -1,8 +1,7 @@
 #! /bin/bash
 
-
-repos="interfaces storage"
-currentDir=$(pwd)
+repos="interfaces model parser storage"
+currentDir=$( cd "$(dirname "$0")" ; pwd -P );
 pomDir="$currentDir/../poms";
 if [ ! -d $pomDir ]; then
 	echo "creating pom directory: $pomDir";

@@ -7,18 +7,18 @@ fi
 currentDir=$( cd "$(dirname "$0")" ; pwd -P );
 poms=$@;
 
-pomDir="$currentDir/../poms";
-effectivePomDir="$currentDir/../poms/effective";
-if [ ! -d $pomDir ]; then
-	echo "creating pom directory: $pomDir";
-	mkdir $pomDir;
-fi
-echo "pom directory: $pomDir"
+#pomDir="$currentDir/../poms";
+#effectivePomDir="$currentDir/../poms/effective";
+#if [ ! -d $pomDir ]; then
+#	echo "creating pom directory: $pomDir";
+#	mkdir $pomDir;
+#fi
+#echo "pom directory: $pomDir"
 
 for pom in $poms; do
     echo "creating effective pom for, $pom";
     pomBase=$( basename $pom );
-    thisPomDir=$( dirname $( greadlink -f $pom ) );
+    thisPomDir=$( dirname $( readlink -f $pom ) );
     echo $pomBase;    
 echo $thisPomDir;
 	(mvn -f $pom org.apache.maven.plugins:maven-dependency-plugin:2.4:tree -DoutputType="graphml" -DoutputFile=$thisPomDir/$pomBase.graphml) &

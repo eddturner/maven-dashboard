@@ -25,7 +25,9 @@ phonecatControllers.controller('MainCtrl', ['$scope', '$routeParams', 'DataSourc
     function ($scope, $routeParams, DataSource) {
         $scope.model = { dependencyList: [],
             pomList: [],
+            pomListing: [],
             currentPomName: "",
+            currentPomPath: "",
             graphBeingShown:false
         };
 
@@ -36,11 +38,15 @@ phonecatControllers.controller('MainCtrl', ['$scope', '$routeParams', 'DataSourc
         var pomFile = pomDir + "storage-2014.05.pom";
         var effectivePomFile = pomDir + "effective/storage-2014.05.pom";
         var pomListFile = scriptDir + "pomList.json";
+        var pomListingFile = scriptDir + "pomListing.json";
 
         /*---------- functions -----------*/
-        $scope.pomListOnClick = function (event) {
-            $scope.model.currentPomName = event.target.innerText;
-            console.log("set $scope.model.currentPomName = " + $scope.model.currentPomName);
+        $scope.pomListOnClick = function (pomJSON) {
+            $scope.model.currentPomName = pomJSON.name;
+            $scope.model.currentPomPath = pomJSON.path;
+            console.log("pomOnClick");
+            console.log(pomJSON);
+//            console.log("set $scope.model.currentPomName = " + $scope.model.currentPomName);
             $scope.updateViews();
         };
 
@@ -63,7 +69,7 @@ phonecatControllers.controller('MainCtrl', ['$scope', '$routeParams', 'DataSourc
             console.log("transform data");
             var x2js = new X2JS();
             var json = x2js.xml_str2json(data);
-            //console.log(data);
+            console.log(data);
             return json.project.dependencies.dependency;
         };
 
@@ -78,15 +84,20 @@ phonecatControllers.controller('MainCtrl', ['$scope', '$routeParams', 'DataSourc
 
         var setPomList = function (data) {
             $scope.model.pomList = angular.fromJson(data);
-            console.log($scope.model.pomList);
+//            console.log($scope.model.pomList);
         };
+        var setPomListing = function (data) {
+            $scope.model.pomListing = angular.fromJson(data);
+            console.log($scope.model.pomListing);
+        }
 
         $scope.updateViews = function () {
-            DataSource.applyTransformation(pomDir + "effective/" + $scope.model.currentPomName, setDependencyList, xmlTransform);
+            DataSource.applyTransformation($scope.model.currentPomPath+"-effective", setDependencyList, xmlTransform);
         };
 
         $scope.updateViews();
         DataSource.applyTransformation(pomListFile, setPomList, null);
+        DataSource.applyTransformation(pomListingFile, setPomListing, null);
 
     }
 ]);

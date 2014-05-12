@@ -15,19 +15,65 @@
         <!--<div class="pom-chooser-title">{{model.currentPomName === null ? "Please select a POM below." : model.currentPomName}}</div>-->
         <!--<div class="pom-chooser-body">-->
         <div class="pom-chooser-body">
-            <!--<ul class="pom-list">-->
-            <!--ng-class="{ 'pom-list-item-hovering' : hover}"-->
-            <!--ng-class="{ 'active' : ( pom.name === model.currentPomName ) || ( $first && model.currentPomName === '' ) }"-->
             <ul class="nav nav-pills nav-stacked">
-                <li ng-repeat="pom in model.pomList.poms | filter:model.pomSearchText | orderBy:orderByRelease:true"
-                    ng-class="{ 'active' : ( pom.name === model.currentPomName ) }"
+                <!--old working repeat based on flat list of pom names-->
+                <!--<li ng-repeat="pom in model.pomList.poms | filter:model.pomSearchText | orderBy:orderByRelease:true"-->
+                    <!--ng-class="{ 'active' : ( pom.name === model.currentPomName ) }"-->
 
-                    ng-click="pomListOnClick($event)">
-                    <a>
-                        {{pom.name}}
-                    </a>
-                </li>
+                    <!--ng-click="pomListOnClick($event)">-->
+                    <!--<a>{{pom.name}}</a>-->
+                <!--</li>-->
+
+
+
+                <!--<li ng-click="showArtifacts = !showArtifacts"><a>2014.05</a></li>-->
+
+                <!--<ul class="nav nav-pills nav-stacked" collapse="showArtifacts">-->
+                <!--<li ng-click="showInterfacesPoms = !showInterfacesPoms"><a>interfaces</a></li>-->
+                <!--<ul class="nav nav-pills nav-stacked" collapse="showInterfacesPoms">-->
+                <!--<li><a>intefaces-2014.05-hotfix-2.pom</a></li>-->
+                <!--<li><a>intefaces-2014.05-hotfix-1.pom</a></li>-->
+                <!--<li><a>intefaces-2014.05.pom</a></li>-->
+                <!--</ul>-->
+                <!--</ul>-->
+
+                <!--multiple borders-->
+                <!--<ul style="border-left: 4px solid #99c6d7;"class="nav nav-pills nav-stacked" ng-repeat="v in model.pomListing.versions">-->
+                    <!--<li ng-click="v.showArtifacts = !v.showArtifacts"><a>{{v.version}}</a></li>-->
+                    <!--<ul class="nav nav-pills nav-stacked" collapse="v.showArtifacts">-->
+                        <!--<ul style="border-left: 4px solid #9bdd90;" class="nav nav-pills nav-stacked" ng-repeat="a in v.artifacts">-->
+                            <!--<li ng-click="a.showPoms = !a.showPoms"><a>{{a.artifact}}</a></li>-->
+                            <!--<ul style="padding-left:4px; border-left: 4px solid #99c6d7;" class="nav nav-pills nav-stacked" collapse="a.showPoms">-->
+                                <!--<li ng-repeat="p in a.poms"><a>{{p.name}}</a></li>-->
+                            <!--</ul>-->
+                        <!--</ul>-->
+                    <!--</ul>-->
+                <!--</ul>-->
+
+
+                <ul class="nav nav-pills nav-stacked" ng-repeat="v in model.pomListing.versions">
+                    <li ng-click="v.showArtifacts = !v.showArtifacts">
+                        <a><span ng-class="{ 'glyphicon-minus' : v.showArtifacts, 'glyphicon-plus' : !v.showArtifacts }"> {{v.version}}</span></a>
+                    </li>
+                    <ul class="nav nav-pills nav-stacked" collapse="!v.showArtifacts">
+                        <ul style="padding-left:10px;" class="nav nav-pills nav-stacked" ng-repeat="a in v.artifacts">
+                            <li ng-click="a.showPoms = !a.showPoms">
+                                <a><span ng-class="{ 'glyphicon-minus' : a.showPoms, 'glyphicon-plus' : !a.showPomss }"> {{a.artifact}}</span></a>
+                            </li>
+                            <ul style="padding-left:10px;" class="nav nav-pills nav-stacked" collapse="!a.showPoms">
+                                <li style="padding-left:10px;"
+                                    ng-repeat="p in a.poms"
+                                    ng-class="{ 'active' : ( p.name === model.currentPomName ) }"
+                                    ng-click="pomListOnClick(p)">
+                                    <a>{{p.name}}</a>
+                                </li>
+                            </ul>
+                        </ul>
+                    </ul>
+                </ul>
+
             </ul>
+
         </div>
     </div>
 </div>
@@ -36,8 +82,11 @@
     <tabset>
         <tab heading="POM" select="setGraphBeingShown(false)">
             <div class="tab-body">
-                <pre ng-if="model.currentPomName != ''" class="prettyprint"><pom-view pom="original" current-pom-name="model.currentPomName"/></pre>
-                <div ng-if="model.currentPomName === ''"><div class="alert alert-info"><b>Hello!</b> Select a POM on the left to get started...</div></div>
+                <pre ng-if="model.currentPomName != ''" class="prettyprint"><pom-view pom="original"
+                                                                                      current-pom-name="model.currentPomName"/></pre>
+                <div ng-if="model.currentPomName === ''">
+                    <div class="alert alert-info"><b>Hello!</b> Select a POM on the left to get started...</div>
+                </div>
             </div>
         </tab>
         <tab heading="Dependencies" select="setGraphBeingShown(false)">
@@ -48,22 +97,30 @@
                         {{dependency.groupId}}:{{dependency.artifactId}}:{{dependency.version}}
                     </li>
                 </ul>
-                <div ng-if="model.currentPomName === ''"><div class="alert alert-info"><b>Hello!</b> Select a POM on the left to get started...</div></div>
+                <div ng-if="model.currentPomName === ''">
+                    <div class="alert alert-info"><b>Hello!</b> Select a POM on the left to get started...</div>
+                </div>
             </div>
         </tab>
         <tab select="setGraphBeingShown(false)">
-        <tab-heading>Effective POM</tab-heading> 
+            <tab-heading>Effective POM</tab-heading>
             <div class="tab-body">
-                <pre ng-if="model.currentPomName != ''" class="prettyprint"><pom-view pom="effective" current-pom-name="model.currentPomName"/></pre>
-                <div ng-if="model.currentPomName === ''"><div class="alert alert-info"><b>Hello!</b> Select a POM on the left to get started...</div></div>
+                <pre ng-if="model.currentPomName != ''" class="prettyprint"><pom-view pom="effective"
+                                                                                      current-pom-name="model.currentPomName"/></pre>
+                <div ng-if="model.currentPomName === ''">
+                    <div class="alert alert-info"><b>Hello!</b> Select a POM on the left to get started...</div>
+                </div>
             </div>
         </tab>
         <tab heading="Graph" select="setGraphBeingShown(true)">
             <div class="tab-body">
-                <svg ng-if="model.currentPomName != ''" width="650" height="680" pom-graph current-pom-name="model.currentPomName" graph-being-shown="model.graphBeingShown">
+                <svg ng-if="model.currentPomName != ''" width="650" height="680" pom-graph
+                     current-pom-name="model.currentPomName" graph-being-shown="model.graphBeingShown">
                     <g transform="translate(20,20)"></g>
                 </svg>
-                <div ng-if="model.currentPomName === ''"><div class="alert alert-info"><b>Hello!</b> Select a POM on the left to get started...</div></div>
+                <div ng-if="model.currentPomName === ''">
+                    <div class="alert alert-info"><b>Hello!</b> Select a POM on the left to get started...</div>
+                </div>
             </div>
 
         </tab>

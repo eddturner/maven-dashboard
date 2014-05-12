@@ -1,0 +1,107 @@
+{
+   "versions" : [
+      {
+         "version" : "2014.04",
+         "artifacts" : [
+            {
+               "artifact" : "parser",
+               "poms" : [
+                  {"name" : "parser-2014.04.pom", "path" : "../poms/2014.04/parser/parser-2014.04.pom"}
+               ]
+            }
+         ]
+      },
+      {
+         "version" : "2014.05",
+         "artifacts" : [
+            {
+               "artifact" : "interfaces",
+               "poms" : [
+                  {"name" : "interfaces-2014.05-hotfix-1.pom", "path" : "../poms/2014.05/interfaces/interfaces-2014.05-hotfix-1.pom"},
+                  {"name" : "interfaces-2014.05-hotfix-2.pom", "path" : "../poms/2014.05/interfaces/interfaces-2014.05-hotfix-2.pom"},
+                  {"name" : "interfaces-2014.05-hotfix-3.pom", "path" : "../poms/2014.05/interfaces/interfaces-2014.05-hotfix-3.pom"},
+                  {"name" : "interfaces-2014.05-hotfix-4.pom", "path" : "../poms/2014.05/interfaces/interfaces-2014.05-hotfix-4.pom"},
+                  {"name" : "interfaces-2014.05-hotfix-5.pom", "path" : "../poms/2014.05/interfaces/interfaces-2014.05-hotfix-5.pom"},
+                  {"name" : "interfaces-2014.05-hotfix-6.pom", "path" : "../poms/2014.05/interfaces/interfaces-2014.05-hotfix-6.pom"},
+                  {"name" : "interfaces-2014.05.pom", "path" : "../poms/2014.05/interfaces/interfaces-2014.05.pom"}
+               ]
+            },
+            {
+               "artifact" : "model",
+               "poms" : [
+                  {"name" : "model-2014.05-hotfix-1.pom", "path" : "../poms/2014.05/model/model-2014.05-hotfix-1.pom"},
+                  {"name" : "model-2014.05-hotfix-2.pom", "path" : "../poms/2014.05/model/model-2014.05-hotfix-2.pom"},
+                  {"name" : "model-2014.05-hotfix-3.pom", "path" : "../poms/2014.05/model/model-2014.05-hotfix-3.pom"},
+                  {"name" : "model-2014.05-hotfix-4.pom", "path" : "../poms/2014.05/model/model-2014.05-hotfix-4.pom"},
+                  {"name" : "model-2014.05-hotfix-5.pom", "path" : "../poms/2014.05/model/model-2014.05-hotfix-5.pom"},
+                  {"name" : "model-2014.05-hotfix-6.pom", "path" : "../poms/2014.05/model/model-2014.05-hotfix-6.pom"},
+                  {"name" : "model-2014.05.pom", "path" : "../poms/2014.05/model/model-2014.05.pom"}
+               ]
+            },
+            {
+               "artifact" : "parser",
+               "poms" : [
+                  {"name" : "parser-2014.05.pom", "path" : "../poms/2014.05/parser/parser-2014.05.pom"}
+               ]
+            },
+            {
+               "artifact" : "storage",
+               "poms" : [
+                  {"name" : "storage-2014.05-hotfix-1.pom", "path" : "../poms/2014.05/storage/storage-2014.05-hotfix-1.pom"},
+                  {"name" : "storage-2014.05-hotfix-2.pom", "path" : "../poms/2014.05/storage/storage-2014.05-hotfix-2.pom"},
+                  {"name" : "storage-2014.05-hotfix-3.pom", "path" : "../poms/2014.05/storage/storage-2014.05-hotfix-3.pom"},
+                  {"name" : "storage-2014.05-hotfix-4.pom", "path" : "../poms/2014.05/storage/storage-2014.05-hotfix-4.pom"},
+                  {"name" : "storage-2014.05-hotfix-5.pom", "path" : "../poms/2014.05/storage/storage-2014.05-hotfix-5.pom"},
+                  {"name" : "storage-2014.05-hotfix-6.pom", "path" : "../poms/2014.05/storage/storage-2014.05-hotfix-6.pom"},
+                  {"name" : "storage-2014.05-hotfix-7.pom", "path" : "../poms/2014.05/storage/storage-2014.05-hotfix-7.pom"},
+                  {"name" : "storage-2014.05-hotfix-8.pom", "path" : "../poms/2014.05/storage/storage-2014.05-hotfix-8.pom"},
+                  {"name" : "storage-2014.05-hotfix-9.pom", "path" : "../poms/2014.05/storage/storage-2014.05-hotfix-9.pom"},
+                  {"name" : "storage-2014.05.pom", "path" : "../poms/2014.05/storage/storage-2014.05.pom"}
+               ]
+            },
+            {
+               "artifact" : "util",
+               "poms" : [
+                  {"name" : "util-2014.05-hotfix-1.pom", "path" : "../poms/2014.05/util/util-2014.05-hotfix-1.pom"},
+                  {"name" : "util-2014.05.pom", "path" : "../poms/2014.05/util/util-2014.05.pom"}
+               ]
+            }
+         ]
+      },
+      {
+         "version" : "2014.06",
+         "artifacts" : [
+            {
+               "artifact" : "interfaces",
+               "poms" : [
+                  {"name" : "interfaces-2014.06.pom", "path" : "../poms/2014.06/interfaces/interfaces-2014.06.pom"}
+               ]
+            },
+            {
+               "artifact" : "model",
+               "poms" : [
+                  {"name" : "model-2014.06.pom", "path" : "../poms/2014.06/model/model-2014.06.pom"}
+               ]
+            },
+            {
+               "artifact" : "parser",
+               "poms" : [
+                  {"name" : "parser-2014.06.pom", "path" : "../poms/2014.06/parser/parser-2014.06.pom"}
+               ]
+            },
+            {
+               "artifact" : "storage",
+               "poms" : [
+                  {"name" : "storage-2014.06.pom", "path" : "../poms/2014.06/storage/storage-2014.06.pom"}
+               ]
+            },
+            {
+               "artifact" : "util",
+               "poms" : [
+                  {"name" : "util-2014.06.pom", "path" : "../poms/2014.06/util/util-2014.06.pom"}
+               ]
+            }
+         ]
+      }
+   ]
+}

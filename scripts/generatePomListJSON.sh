@@ -11,31 +11,6 @@ if [ ! -d $pomDir ]; then
 	exit 1;
 fi
 
-#printf "{\n";
-#printf "   \"poms\" : [\n";
-# iterate through poms in for loop
-#count=0;
-#for pom in `ls -1 $pomDir/*.pom`; do
-#	if [ "$count" -ne "0" ]; then
-#		printf ",\n";
-#	fi
-#	pomName=$(basename $pom);
-#	printf "      {\"name\" : \"$pomName\"}";
-#	count=$(($count + 1));
-#done
-#printf "\n   ]\n";
-#printf "}";
-
-#for versionDir in `ls -d $pomDir/*/ | grep '[0-9]\{4\}\.[0-9]\{2\}'`; do
-#	printf "versionDir = $versionDir\n";
-#	for artifactDir in `ls -d $versionDir/*`; do
-#		echo "artifactDir = $artifactDir"
-#		for pom in `ls $artifactDir/*.pom`; do
-#			echo "{ $versionDir, $artifactDir, $pom }";
-#		done
-#	done
-#done;
-
 printf "{\n";
 printf "   \"versions\" : [\n";
 vCount=0;
@@ -59,7 +34,7 @@ for versionDir in `ls -l $pomDir | grep '^d' | awk '{print $9}' | grep '[0-9]\{4
 			if [ "$pCount" -ne "0" ]; then
                			printf ",\n";
         		fi
-			pomPath=$( greadlink -f $pom );
+			pomPath=$( readlink -f $pom );
 			pomName=$( basename $pom );
 			printf "                  {\"name\" : \"$pomName\", \"path\" : \"$pomPath\"}";
 			pCount=$(($pCount + 1));

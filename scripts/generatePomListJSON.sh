@@ -34,7 +34,8 @@ for versionDir in `ls -l $pomDir | grep '^d' | awk '{print $9}' | grep '[0-9]\{4
 			if [ "$pCount" -ne "0" ]; then
                			printf ",\n";
         		fi
-			pomPath=$( readlink -f $pom );
+			#pomPath=$( readlink -f $pom );
+			pomPath=$pom;
 			pomName=$( basename $pom );
 			printf "                  {\"name\" : \"$pomName\", \"path\" : \"$pomPath\"}";
 			pCount=$(($pCount + 1));

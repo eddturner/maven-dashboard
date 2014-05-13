@@ -9,9 +9,9 @@ directivesModule.directive('pomGraph', function ($timeout, DataSource) {
     var linkFn;
     console.log("pom graph 1");
     linkFn = function (scope, element, attrs) {
-        scope.$watchCollection('[graphBeingShown, currentPomName]', function () {
-            if(scope.currentPomName != null)
-                console.log('** scope.currentPomName='+ scope.currentPomName);
+        scope.$watchCollection('[graphBeingShown, currentPomPath]', function () {
+            if(scope.currentPomPath != null)
+                console.log('** scope.currentPomName='+ scope.currentPomPath);
             if(scope.graphBeingShown != null)
                 console.log('** scope.graphBeingShown='+scope.graphBeingShown);
             if(scope.graphBeingShown == false)
@@ -19,7 +19,7 @@ directivesModule.directive('pomGraph', function ($timeout, DataSource) {
             var updateGraph = $timeout(function () {
 
                 console.log("pom graph 2");
-                var pomFile = "../../poms/effective/" + scope.currentPomName;
+                var pomFile = scope.currentPomPath;
                 var pomGraphFile = pomFile + ".graphml";
 
                 var xmlTransform = function (data) {
@@ -33,7 +33,7 @@ directivesModule.directive('pomGraph', function ($timeout, DataSource) {
 
                 DataSource.applyTransformation(pomGraphFile, function (data) {
                     console.log(">> ");
-                    console.log(data);
+//                    console.log(data);
                     var g = new dagreD3.Digraph();
                     data.node.forEach(function (node) {
                         var nodeId = node._id;
@@ -94,7 +94,7 @@ directivesModule.directive('pomGraph', function ($timeout, DataSource) {
     return {
         restrict: 'A',
         scope: {
-            currentPomName: '=',
+            currentPomPath: '=',
             graphBeingShown: '='
         },
         link: linkFn
@@ -102,16 +102,18 @@ directivesModule.directive('pomGraph', function ($timeout, DataSource) {
 }).directive('pomView', function ($timeout, $compile, DataSource) {
     var linkFn;
     linkFn = function (scope, element, attrs) {
-        scope.$watch('currentPomName', function () {
+        scope.$watch('currentPomPath', function () {
 //            $timeout(function () {
             var pomFile = "";
             console.log("currentpom in directive");
-            console.log(scope.currentPomName);
+            console.log(scope.currentPomPath);
             if (attrs.pom === "effective") {
-                pomFile = "../../poms/effective/" + scope.currentPomName;
+                pomFile = scope.currentPomPath+"-effective";
+//                pomFile = "../../poms/effective/" + scope.currentPomName;
             }
             else if (attrs.pom === "original") {
-                pomFile = "../../poms/" + scope.currentPomName;
+                pomFile = scope.currentPomPath;
+//                pomFile = "../../poms/" + scope.currentPomName;
             }
             console.log("pomFile in directive = " + pomFile);
 
@@ -134,7 +136,7 @@ directivesModule.directive('pomGraph', function ($timeout, DataSource) {
 
     return {
         restrict: 'EA',
-        scope: { currentPomName: '=' },
+        scope: { currentPomPath: '=' },
         link: linkFn
     }
 });

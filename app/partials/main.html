@@ -83,7 +83,7 @@
         <tab heading="POM" select="setGraphBeingShown(false)">
             <div class="tab-body">
                 <pre ng-if="model.currentPomName != ''" class="prettyprint"><pom-view pom="original"
-                                                                                      current-pom-name="model.currentPomName"/></pre>
+                                                                                      current-pom-path="model.currentPomPath"/></pre>
                 <div ng-if="model.currentPomName === ''">
                     <div class="alert alert-info"><b>Hello!</b> Select a POM on the left to get started...</div>
                 </div>
@@ -106,7 +106,7 @@
             <tab-heading>Effective POM</tab-heading>
             <div class="tab-body">
                 <pre ng-if="model.currentPomName != ''" class="prettyprint"><pom-view pom="effective"
-                                                                                      current-pom-name="model.currentPomName"/></pre>
+                                                                                      current-pom-path="model.currentPomPath"/></pre>
                 <div ng-if="model.currentPomName === ''">
                     <div class="alert alert-info"><b>Hello!</b> Select a POM on the left to get started...</div>
                 </div>
@@ -115,7 +115,7 @@
         <tab heading="Graph" select="setGraphBeingShown(true)">
             <div class="tab-body">
                 <svg ng-if="model.currentPomName != ''" width="650" height="680" pom-graph
-                     current-pom-name="model.currentPomName" graph-being-shown="model.graphBeingShown">
+                     current-pom-path="model.currentPomPath" graph-being-shown="model.graphBeingShown">
                     <g transform="translate(20,20)"></g>
                 </svg>
                 <div ng-if="model.currentPomName === ''">

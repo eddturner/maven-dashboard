@@ -15,6 +15,7 @@ services.factory('Phone', ['$resource',
 services.factory('DataSource', ['$http', function ($http) {
     return {
         applyTransformation: function (file, callback, transform) {
+            console.log("DataSource GET: "+file);
             $http.get(
                 file,
                 {transformResponse: transform}

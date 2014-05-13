@@ -18,3 +18,4 @@ run as ./organiseInFS.sh ../poms/ ../poms/parser*.pom
 ]
 }
 * Update angularjs read json pom list and create an accordian list on the left hand side which opens up version->artifact->poms.
+* need to not use readlink in paths when fetching files... I think

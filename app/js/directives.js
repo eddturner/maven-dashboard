@@ -41,7 +41,7 @@ directivesModule.directive('pomGraph', function ($timeout, DataSource) {
 //                        console.log(node);
                         var text = node.data.ShapeNode.NodeLabel.__text;
                         if(text.indexOf('uk.ac.ebi.uniprot') > -1) {
-                            g.addNode(nodeId, { label: node.data.ShapeNode.NodeLabel.__text, style : "fill: #c5e5c0" });
+                            g.addNode(nodeId, { label: node.data.ShapeNode.NodeLabel.__text, style : "fill: #aad1a5" });
                         }
                         else {
                             g.addNode(nodeId, { label: node.data.ShapeNode.NodeLabel.__text});

@@ -51,18 +51,18 @@
                 <!--</ul>-->
 
 
-                <ul class="nav nav-pills nav-stacked" ng-repeat="v in model.pomListing.versions">
+                <ul class="nav nav-pills nav-stacked" ng-repeat="v in model.pomListing.versions | filter:model.pomSearchText | orderBy:orderByRelease:true">
                     <li ng-click="v.showArtifacts = !v.showArtifacts">
                         <a><span ng-class="{ 'glyphicon-minus' : v.showArtifacts, 'glyphicon-plus' : !v.showArtifacts }"> {{v.version}}</span></a>
                     </li>
                     <ul class="nav nav-pills nav-stacked" collapse="!v.showArtifacts">
-                        <ul style="padding-left:10px;" class="nav nav-pills nav-stacked" ng-repeat="a in v.artifacts">
+                        <ul style="padding-left:10px;" class="nav nav-pills nav-stacked" ng-repeat="a in v.artifacts | filter:model.pomSearchText">
                             <li ng-click="a.showPoms = !a.showPoms">
                                 <a><span ng-class="{ 'glyphicon-minus' : a.showPoms, 'glyphicon-plus' : !a.showPomss }"> {{a.artifact}}</span></a>
                             </li>
                             <ul style="padding-left:10px;" class="nav nav-pills nav-stacked" collapse="!a.showPoms">
                                 <li style="padding-left:10px;"
-                                    ng-repeat="p in a.poms"
+                                    ng-repeat="p in a.poms | filter:model.pomSearchText | orderBy:orderByHotfixAndRelease:true"
                                     ng-class="{ 'active' : ( p.name === model.currentPomName ) }"
                                     ng-click="pomListOnClick(p)">
                                     <a>{{p.name}}</a>

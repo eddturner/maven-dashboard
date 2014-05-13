@@ -55,8 +55,18 @@ phonecatControllers.controller('MainCtrl', ['$scope', '$routeParams', 'DataSourc
             console.log("set $scope.model.graphBeingShown = " + $scope.model.graphBeingShown);
         };
 
+        /*--------- filters ---------*/
         $scope.orderByRelease = function (pomName) {
-            var matches = pomName.name.match(/.*([0-9]{4}\.[0-9]{2}.*)\.pom/);
+            var matches = pomName.version.match(/.*([0-9]{4}\.[0-9]{2}).*/);
+            if (matches.length === 2) {
+                return matches[1];
+            }
+            else {
+                return pomName;
+            }
+        };
+        $scope.orderByHotfixAndRelease = function (pomName) {
+            var matches = pomName.name.match(/.*([0-9]{4}\.[0-9]{2}(-hotfix-[0-9]+)*?)\.pom/);
             if (matches.length === 2) {
                 return matches[1];
             }

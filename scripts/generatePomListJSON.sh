@@ -35,7 +35,7 @@ for versionDir in `ls -l $pomDir | grep '^d' | awk '{print $9}' | grep '[0-9]\{4
                			printf ",\n";
         		fi
 			#pomPath=$( readlink -f $pom );
-			pomPath=$pom;
+			pomPath="../$pom"; # need directory below, because this is where the app is running from
 			pomName=$( basename $pom );
 			printf "                  {\"name\" : \"$pomName\", \"path\" : \"$pomPath\"}";
 			pCount=$(($pCount + 1));

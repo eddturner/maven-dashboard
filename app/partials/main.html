@@ -53,12 +53,15 @@
 
                 <ul class="nav nav-pills nav-stacked" ng-repeat="v in model.pomListing.versions | filter:model.pomSearchText | orderBy:orderByRelease:true">
                     <li ng-click="v.showArtifacts = !v.showArtifacts">
-                        <a><span ng-class="{ 'glyphicon-minus' : v.showArtifacts, 'glyphicon-plus' : !v.showArtifacts }"> {{v.version}}</span><span class="badge pull-right alert-info">{{filteredArtifacts.length}}</span></a></a>
+                        <!--<a><span ng-class="{ 'glyphicon-minus' : v.showArtifacts, 'glyphicon-plus' : !v.showArtifacts }"> {{v.version}}</span><span class="badge pull-right alert-info">{{filteredArtifacts.length}}</span></a></a>-->
+                        <a><span ng-class="{ 'glyphicon-minus' : v.showArtifacts, 'glyphicon-plus' : !v.showArtifacts }"> {{v.version}}</span><span style="background-color: #589fd8; color:white;" class="badge pull-right alert-info">{{filteredArtifacts.length}}</span></a></a>
+                        <!--<a><span ng-class="{ 'glyphicon-minus' : v.showArtifacts, 'glyphicon-plus' : !v.showArtifacts }"> {{v.version}}</span><span class="badge pull-right label-primary">{{filteredArtifacts.length}}</span></a>-->
                     </li>
                     <ul class="nav nav-pills nav-stacked" collapse="!v.showArtifacts">
                         <ul style="padding-left:10px;" class="nav nav-pills nav-stacked" ng-repeat="a in filteredArtifacts = (v.artifacts | filter:model.pomSearchText)">
                             <li ng-click="a.showPoms = !a.showPoms">
-                                <a><span ng-class="{ 'glyphicon-minus' : a.showPoms, 'glyphicon-plus' : !a.showPomss }"> {{a.artifact}}</span><span class="badge pull-right alert-success">{{filteredPoms.length}}</span></a>
+                                <!--<a><span ng-class="{ 'glyphicon-minus' : a.showPoms, 'glyphicon-plus' : !a.showPomss }"> {{a.artifact}}</span><span class="badge pull-right alert-success">{{filteredPoms.length}}</span></a>-->
+                                <a><span ng-class="{ 'glyphicon-minus' : a.showPoms, 'glyphicon-plus' : !a.showPomss }"> {{a.artifact}}</span><span style="background-color: #9ac7ed; color:white;" class="badge pull-right">{{filteredPoms.length}}</span></a>
                             </li>
                             <ul style="padding-left:10px;" class="nav nav-pills nav-stacked" collapse="!a.showPoms">
                                 <li style="padding-left:10px;"
